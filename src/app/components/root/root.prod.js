@@ -6,21 +6,24 @@ import NoMatch from '../../components/shared/noMatch.jsx';
 import Main from '../../components/main.jsx';
 import Feed from '../../components/feed.jsx';
 import SingleItem from '../../components/singleItem.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const Root = props => {
     const { store, history } = props;
 
     return (
-        <Provider store={store}>
-            <Router history={history}>
-                <Route path="/" component={Wrapper}>
-                    <IndexRoute history={history} component={Main}/>
-                    <Route path="feed" component={Feed}/>
-                    <Route path="singleItem/:id" component={SingleItem}/>
-                    <Route path="*" component={NoMatch}/>
-                </Route>
-            </Router>
-        </Provider>
+        <MuiThemeProvider>
+            <Provider store={store}>
+                <Router history={history}>
+                    <Route path="/" component={Wrapper}>
+                        <IndexRoute history={history} component={Main} />
+                        <Route history={history} path="feed" component={Feed} />
+                        <Route history={history} path="singleItem/:id" component={SingleItem} />
+                        <Route history={history} path="*" component={NoMatch} />
+                    </Route>
+                </Router>
+            </Provider>
+        </MuiThemeProvider>
     );
 };
 

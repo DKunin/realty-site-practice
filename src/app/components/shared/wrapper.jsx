@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import Actions from '../../redux/actions/';
+import AppBar from 'material-ui/AppBar';
 
-const Wrapper = (props) => {
-  const { children } = props
-
-  return(
-        <div className='spread'>
-          {children}
-        </div>
-  )
+class Wrapper extends React.Component {
+    render() {
+        const { children, selectedId } = this.props;
+        return (
+            <div>
+                <AppBar title={selectedId} iconClassNameRight="muidocs-icon-navigation-expand-more" />
+                {children}
+            </div>
+        );
+    }
 }
 
-export default Wrapper
+Wrapper.propTypes = {};
+
+const mapStateToProps = state => {
+    return state.app;
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        reset: () => {
+            dispatch(Actions.resetApp());
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);

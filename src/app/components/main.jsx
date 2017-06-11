@@ -2,47 +2,73 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Actions from '../redux/actions/';
-import Input from './shared/Input';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+    textAlign: 'center',
+    display: 'inline-block',
+    padding: '20px'
+};
 
 class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.nodes = {};
 
-  }
+    }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <Input placeholder='Login' />
-          <Input placeholder='Password' type='password' />
-          <button>
-            Login
-          </button>
-        </form>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div>
+                <Paper style={style} zDepth={1}>
+                    <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
+                        <TextField
+                            hintText="Login"
+                            floatingLabelText="Login"
+                            name="login"
+                        />
+                        <br />
+                        <TextField
+                            name="password"
+                            hintText="Password Field"
+                            floatingLabelText="Password"
+                            type="password"
+                        />
+                        <br />
+                        <br />
+                        <RaisedButton label="Login" type="submit" fullWidth />
+                    </form>
+                </Paper>
+            </div>
+        );
+    }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.route.history.push('/feed');
-  }
+    handleSubmit(event) {
+        event.preventDefault();
+        const { login } = this.nodes.form.elements;
+        this.props.authorise(login.value);
+        this.props.route.history.push('/feed');
+    }
 }
 
-Main.propTypes = {
-}
+Main.propTypes = {};
 
-const mapStateToProps = (state) => {
-  return state.app
-}
+const mapStateToProps = state => {
+    return state.app;
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    reset: () => { dispatch(Actions.resetApp()) },
-    setUser: (user) => { dispatch(Actions.setUser(user)) },
-  }
-}
+const mapDispatchToProps = dispatch => {
+    return {
+        reset: () => {
+            dispatch(Actions.resetApp());
+        },
+        authorise: user => {
+            dispatch(Actions.authorise(user));
+        }
+    };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

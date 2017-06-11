@@ -1,5 +1,10 @@
 const InitialState = () => {
-    return { app: {} };
+    return {
+        app: {
+            auth: {},
+            selectedId: null
+        }
+    };
 };
 
 export default InitialState;
