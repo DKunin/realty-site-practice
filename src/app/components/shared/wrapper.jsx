@@ -9,7 +9,7 @@ class Wrapper extends React.Component {
         const { children, selectedId } = this.props;
         return (
             <div>
-                <AppBar title={selectedId} iconClassNameRight="muidocs-icon-navigation-expand-more" />
+                <AppBar title={selectedId} />
                 {children}
             </div>
         );

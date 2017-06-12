@@ -17,12 +17,11 @@ class Main extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.nodes = {};
-
     }
 
     render() {
         return (
-            <div>
+            <div style={{ display: 'flex', 'alignItems': 'center', 'justifyContent':'center', height: '80%'}}>
                 <Paper style={style} zDepth={1}>
                     <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
                         <TextField

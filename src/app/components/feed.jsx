@@ -10,11 +10,15 @@ import {
     CardText
 } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import InputRange from 'react-input-range';
 
 class Feed extends React.Component {
     constructor(props) {
         super(props);
         this.handleChooseCard = this.handleChooseCard.bind(this);
+        this.state = {
+          value: { min: 2, max: 10 },
+        };
     }
 
     render() {
@@ -22,23 +26,42 @@ class Feed extends React.Component {
 
         return (
             <div>
-                <Card>
-                    <CardHeader
-                        title='URL Avatar'
-                        subtitle='Subtitle'
-                        avatar='http://fillmurray.com/128/128'
-                    />
-                    <CardTitle title='Card title' subtitle='Card subtitle' />
-                    <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                        Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                        Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                    </CardText>
-                    <CardActions>
-                        <FlatButton label='Open' onTouchTap={this.handleChooseCard}/>
-                    </CardActions>
-                </Card>
+                <InputRange
+                    maxValue={20}
+                    minValue={0}
+                    value={this.state.value}
+                    onChange={value => this.setState({ value })} />
+                <div style={{display : 'flex'}}>
+                  
+
+                    <Card style={{width: '50%'}}>
+                        <CardTitle title='Шокальского, ул. д.2 кв. 109' subtitle='89 кв.м' />
+                        <CardMedia>
+                          <img src="http://www.fillmurray.com/200/100" alt="" />
+                        </CardMedia>
+                        <CardText>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Donec mattis pretium massa.
+                            <div><strong>100 000 р</strong></div>
+                        </CardText>
+                        <CardActions>
+                            <FlatButton label='Посмотреть' onTouchTap={this.handleChooseCard}/>
+                        </CardActions>
+                    </Card>                <Card style={{width: '50%'}}>
+                        <CardTitle title='Шокальского, ул. д.2 кв. 109' subtitle='89 кв.м' />
+                        <CardMedia>
+                          <img src="http://www.fillmurray.com/200/100" alt="" />
+                        </CardMedia>
+                        <CardText>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Donec mattis pretium massa.
+                            <div><strong>100 000 р</strong></div>
+                        </CardText>
+                        <CardActions>
+                            <FlatButton label='Посмотреть' onTouchTap={this.handleChooseCard}/>
+                        </CardActions>
+                    </Card>
+                </div>
             </div>
         );
     }
