@@ -2,7 +2,9 @@ const InitialState = () => {
     return {
         app: {
             auth: {},
-            selectedId: null
+            selectedId: null,
+            items: [],
+            formSubmitted: false
         }
     };
 };
