@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './redux/store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import styles from './app.css';
 
 injectTapEventPlugin();
 

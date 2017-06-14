@@ -4,15 +4,13 @@ const buildPath = path.resolve(__dirname, 'www');
 const sourcePath = path.resolve(__dirname, 'src');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const production = process.argv.find(element => element === '--production')
-    ? true
-    : false;
+const production = process.env.NODE_ENV === 'production' ? true : false;
 
 const config = {
     entry: {
         js: './src/app/app.jsx'
-        // html: './src/www/index.html'
     },
     devServer: {
         contentBase: 'src/www',
@@ -22,6 +20,7 @@ const config = {
     },
     output: { path: buildPath, filename: 'bundle.min.js' },
     plugins: [
+        new ExtractTextPlugin('styles.css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new TransferWebpackPlugin([{ from: 'www' }], sourcePath),
@@ -37,17 +36,22 @@ const config = {
                     'babel-loader?' +
                         JSON.stringify({ presets: ['react', 'es2015'] })
                 ]
-            } //,
-            // { test: /\.html$/, loader: 'file-loader?name=[name].[ext]' }
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract(
+                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+                )
+            }
         ]
     },
-    resolve: { extensions: ['.js', '.jsx'] },
-    devtool: 'source-map'
+    resolve: { 
+        extensions: ['.js', '.jsx', '.css']
+    },
+    devtool: production ? false : 'source-map'
 };
 
 if (production) {
-    process.env.NODE_ENV = 'production';
-
     config.plugins = [
         new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
     ].concat(config.plugins);

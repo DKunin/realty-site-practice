@@ -6,6 +6,8 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import styles from './main.css';
+
 const style = {
     textAlign: 'center',
     display: 'inline-block',
@@ -21,7 +23,7 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', 'alignItems': 'center', 'justifyContent':'center', height: '80%'}}>
+            <div className={styles.main}>
                 <Paper style={style} zDepth={1}>
                     <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
                         <TextField
