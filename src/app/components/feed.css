@@ -1,0 +1,19 @@
+.input_slider
+{
+    padding: 30px;
+}
+
+.items_list
+{
+    display: flex;
+
+    flex-flow: wrap;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+.items_item
+{
+    width: 300px;
+    margin: 10px;
+}
