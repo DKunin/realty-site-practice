@@ -7,7 +7,8 @@
     "dev": "webpack-dev-server",
     "test": "npm run pretty && npm run lint && ava",
     "pretty": "prettier --single-quote --tab-width 4 --write ./src/**/*.jsx ./src/**/*.js ./*.js",
-    "build": "npm t && NODE_ENV=production webpack"
+    "build": "npm t && NODE_ENV=production webpack",
+    "publish": "gh-pages -d www -b gh-pages"
   },
   "license": "MIT",
   "dependencies": {
