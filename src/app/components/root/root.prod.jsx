@@ -15,7 +15,7 @@ const Root = props => {
         <MuiThemeProvider>
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/" component={Wrapper}>
+                    <Route history={history} path="/" component={Wrapper}>
                         <IndexRoute history={history} component={Main} />
                         <Route history={history} path="feed" component={Feed} />
                         <Route history={history} path="singleItem/:id" component={SingleItem} />

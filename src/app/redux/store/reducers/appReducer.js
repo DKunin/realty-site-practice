@@ -9,7 +9,9 @@ const AppReducer = (state, action) => {
             return InitialState().app;
 
         case AUTH:
-            return { ...state, auth: { login: action.login } };
+            return {
+                ...state, auth: { login: action.login }
+            };
 
         case CHOOSE_ITEM:
             return {

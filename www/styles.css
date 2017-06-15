@@ -7,3 +7,17 @@
     align-items: center;
     justify-content: center;
 }
+html,
+body
+{
+    height: 100%;
+}
+body
+{
+    margin: 0;
+}
+:global(
+    #app {
+        height: 100%;
+    }
+)

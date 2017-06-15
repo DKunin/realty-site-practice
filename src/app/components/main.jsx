@@ -8,12 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import styles from './main.css';
 
-const style = {
-    textAlign: 'center',
-    display: 'inline-block',
-    padding: '20px'
-};
-
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +18,7 @@ class Main extends React.Component {
     render() {
         return (
             <div className={styles.main}>
-                <Paper style={style} zDepth={1}>
+                <Paper className={styles.paper} zDepth={1}>
                     <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
                         <TextField
                             hintText="Login"

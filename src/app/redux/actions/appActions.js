@@ -16,7 +16,7 @@ const AppActions = {
                 .then(result => result.json())
                 .then((items) => {
                     dispatch({ type: LOAD_ITEMS, items });
-                })
+                });
         };
     },
     submitInfo: (formNode) => {
@@ -26,9 +26,9 @@ const AppActions = {
                 body: new FormData(formNode)
             })
                 .then(result => result.json())
-                .then((items) => {
+                .then(() => {
                     dispatch({ type: FORM_SUBMITTED });
-                })
+                });
         };
     },
     authorise: (login) => {

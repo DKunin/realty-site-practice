@@ -1,10 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Actions from '../redux/actions/';
 import {
     Card,
     CardActions,
-    CardHeader,
     CardMedia,
     CardTitle,
     CardText
@@ -20,7 +19,7 @@ class Feed extends React.Component {
         this.processFilter = this.processFilter.bind(this);
         this.renderSingleItem = this.renderSingleItem.bind(this);
         this.state = {
-          value: { min: 100000, max: 1000000 },
+            value: { min: 100000, max: 1000000 }
         };
     }
 
@@ -48,7 +47,7 @@ class Feed extends React.Component {
                     value={this.state.value}
                     onChange={value => this.setState({ value })} />
                 </div>
-                <div style={{display : 'flex', flexFlow: 'wrap', 'alignContent': 'flex-start', justifyContent:         'center' }}>
+                <div style={{display : 'flex', flexFlow: 'wrap', 'alignContent': 'flex-start', justifyContent: 'center' }}>
                     {(this.props.items||[]).filter(this.processFilter).map(this.renderSingleItem)}
                 </div>
             </div>
@@ -83,8 +82,6 @@ class Feed extends React.Component {
         return item.price > this.state.value.min && item.price < this.state.value.max;
     }
 }
-
-Feed.propTypes = {};
 
 const mapStateToProps = state => {
     return state.app;

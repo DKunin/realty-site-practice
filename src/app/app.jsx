@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './redux/store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import styles from './app.css';
 
 injectTapEventPlugin();
 
@@ -14,6 +13,9 @@ const history = createHistory();
 const Store = configureStore(InitialState(), history);
 
 ReactDOM.render(
-    <Root store={Store} history={history} />,
+    <Root
+        store={Store}
+        history={history}
+    />,
     document.getElementById('app')
 );
