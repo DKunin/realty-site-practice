@@ -10,7 +10,8 @@ const AppReducer = (state, action) => {
 
         case AUTH:
             return {
-                ...state, auth: { login: action.login }
+                ...state,
+                auth: { login: action.login }
             };
 
         case CHOOSE_ITEM:

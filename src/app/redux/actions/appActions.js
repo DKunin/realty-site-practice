@@ -4,23 +4,25 @@ const { RESET, AUTH, CHOOSE_ITEM, LOAD_ITEMS, FORM_SUBMITTED } = ActionTypes;
 
 const AppActions = {
     resetApp: () => {
-        return (dispatch) => {
+        return dispatch => {
             setTimeout(function() {
                 dispatch({ type: RESET });
             }, 1000);
         };
     },
     loadItems: () => {
-        return (dispatch) => {
-            fetch('https://allow-any-origin.appspot.com/http://beta.json-generator.com/api/json/get/N14Y2EYzX')
+        return dispatch => {
+            fetch(
+                'https://allow-any-origin.appspot.com/http://beta.json-generator.com/api/json/get/N14Y2EYzX'
+            )
                 .then(result => result.json())
-                .then((items) => {
+                .then(items => {
                     dispatch({ type: LOAD_ITEMS, items });
                 });
         };
     },
-    submitInfo: (formNode) => {
-        return (dispatch) => {
+    submitInfo: formNode => {
+        return dispatch => {
             fetch('http://httpbin.org/post', {
                 method: 'post',
                 body: new FormData(formNode)
@@ -31,11 +33,11 @@ const AppActions = {
                 });
         };
     },
-    authorise: (login) => {
-        return (dispatch) => dispatch({ type: AUTH, login });
+    authorise: login => {
+        return dispatch => dispatch({ type: AUTH, login });
     },
-    selectItem: (id) => {
-        return (dispatch) => dispatch({ type: CHOOSE_ITEM, id });
+    selectItem: id => {
+        return dispatch => dispatch({ type: CHOOSE_ITEM, id });
     }
 };
 

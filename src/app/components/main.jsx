@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Actions from '../redux/actions/';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -19,22 +18,27 @@ class Main extends React.Component {
         return (
             <div className={styles.main}>
                 <Paper className={styles.paper} zDepth={1}>
-                    <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
-                        <TextField
-                            hintText="Login"
-                            floatingLabelText="Login"
-                            name="login"
-                        />
-                        <br />
-                        <TextField
-                            name="password"
-                            hintText="Password Field"
-                            floatingLabelText="Password"
-                            type="password"
-                        />
-                        <br />
-                        <br />
-                        <RaisedButton label="Login" type="submit" fullWidth />
+                    <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form;}}>
+                        <div>
+                            <TextField
+                                hintText="Login"
+                                floatingLabelText="Login"
+                                name="login"
+                            />
+                        </div>
+
+                        <div>
+                            <TextField
+                                name="password"
+                                hintText="Password Field"
+                                floatingLabelText="Password"
+                                type="password"
+                            />
+                        </div>
+
+                        <div>
+                            <RaisedButton label="Login" type="submit" fullWidth />
+                        </div>
                     </form>
                 </Paper>
             </div>
@@ -44,12 +48,16 @@ class Main extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const { login } = this.nodes.form.elements;
-        this.props.authorise(login.value);
-        this.props.route.history.push('/feed');
+        const { authorise, route } = this.props;
+        authorise(login.value);
+        route.history.push('/feed');
     }
 }
 
-Main.propTypes = {};
+Main.propTypes = {
+    auth: PropTypes.object.isRequired,
+    authorise: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
     return state.app;

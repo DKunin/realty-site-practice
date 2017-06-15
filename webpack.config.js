@@ -1,3 +1,5 @@
+'use strict';
+
 const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'www');
@@ -5,6 +7,7 @@ const sourcePath = path.resolve(__dirname, 'src');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production' ? true : false;
 
@@ -45,7 +48,7 @@ const config = {
             }
         ]
     },
-    resolve: { 
+    resolve: {
         extensions: ['.js', '.jsx', '.css']
     },
     devtool: production ? false : 'source-map'
@@ -53,7 +56,11 @@ const config = {
 
 if (production) {
     config.plugins = [
-        new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
+        new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
+        new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.css$/,
+            cssProcessorOptions: { discardComments: { removeAll: true } }
+        })
     ].concat(config.plugins);
 }
 

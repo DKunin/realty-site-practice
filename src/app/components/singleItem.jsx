@@ -1,17 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Actions from '../redux/actions/';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
-const style = {
-    textAlign: 'center',
-    display: 'inline-block',
-    padding: '20px',
-    width: '50%'
-};
+import styles from './singleItem.css';
 
 import formatNum from 'format-num';
 
@@ -27,11 +20,12 @@ class SingleItem extends React.Component {
     }
 
     render() {
-        const { address, area, price } = (this.props.items || []).find(({ _id }) => _id === this.props.selectedId);
+        const { items, selectedId } = this.props;
+        const { address, area, price } = (items || []).find(({ _id }) => _id === selectedId);
 
         return (
-            <div style={{ display: 'flex',  alignItems: 'stretch', height: '80%' }}>
-                <Paper style={style} zDepth={1}>
+            <div className={styles.item}>
+                <Paper className={styles.paper} zDepth={1}>
                     <h1>
                         {address}
                     </h1>
@@ -42,7 +36,7 @@ class SingleItem extends React.Component {
                         {formatNum(price)}
                     </h1>
                 </Paper>
-                <Paper style={style} zDepth={1}>
+                <Paper className={styles.paper} zDepth={1}>
                     {this.renderForm()}
                 </Paper>
             </div>
@@ -56,21 +50,26 @@ class SingleItem extends React.Component {
             );
         }
         return (
-            <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form}}>
-                <TextField
-                    hintText="Имя"
-                    floatingLabelText="Имя"
-                    name="login"
-                />
-                <br />
-                <TextField
-                    name="password"
-                    hintText="Телефон"
-                    floatingLabelText="Телефон"
-                />
-                <br />
-                <br />
-                <RaisedButton label="отправить" type="submit" fullWidth />
+            <form onSubmit={this.handleSubmit} ref={(form) => {this.nodes.form = form;}}>
+                <div>
+                    <TextField
+                        hintText="Имя"
+                        floatingLabelText="Имя"
+                        name="login"
+                    />
+                </div>
+
+                <div>
+                    <TextField
+                        name="phone"
+                        hintText="Телефон"
+                        floatingLabelText="Телефон"
+                    />
+                </div>
+
+                <div>
+                    <RaisedButton label="отправить" type="submit" fullWidth />
+                </div>
             </form>
         );
     }
@@ -81,7 +80,12 @@ class SingleItem extends React.Component {
     }
 }
 
-SingleItem.propTypes = {};
+SingleItem.propTypes = {
+    items: PropTypes.array.isRequired,
+    selectedId: PropTypes.string.isRequired,
+    selectItem: PropTypes.func.isRequired,
+    submitInfo: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
     return state.app;
