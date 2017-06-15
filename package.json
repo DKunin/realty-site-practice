@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint './src/app/**'",
     "dev": "webpack-dev-server",
+    "test": "ava",
     "pretty": "prettier --single-quote --tab-width 4 --write ./src/**/*.jsx ./src/**/*.js ./*.js",
     "build": "NODE_ENV=production webpack"
   },
@@ -21,6 +22,7 @@
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
+    "ava": "0.19.1",
     "babel-core": "^6.2.1",
     "babel-eslint": "7.1.1",
     "babel-loader": "^6.2.0",
@@ -43,5 +45,8 @@
     "transfer-webpack-plugin": "^0.1.4",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.3.0"
+  },
+  "ava": {
+    "require": "babel-core/register"
   }
 }
