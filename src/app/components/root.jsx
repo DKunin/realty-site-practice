@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 import { Provider } from 'react-redux';
 import Wrapper from './wrapper.jsx';
 import NoMatch from './noMatch.jsx';
@@ -16,7 +16,8 @@ const Root = props => {
             <Provider store={store}>
                 <Router history={history}>
                     <Route history={history} path="/" component={Wrapper}>
-                        <IndexRoute history={history} component={Main} />
+                        <IndexRedirect to="login" />
+                        <Route history={history} path="login" component={Main} />
                         <Route history={history} path="feed" component={Feed} />
                         <Route history={history} path="singleItem/:id" component={SingleItem} />
                         <Route history={history} path="*" component={NoMatch} />
