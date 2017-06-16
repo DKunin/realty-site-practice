@@ -27,7 +27,11 @@ const config = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new TransferWebpackPlugin([{ from: 'www' }], sourcePath),
-        new webpack.DefinePlugin({ PRODUCTION: production })
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        })
     ],
     module: {
         loaders: [
