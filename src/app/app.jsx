@@ -6,11 +6,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import InitialState from './redux/store/initialState';
-const Store = configureStore(InitialState(), browserHistory);
+const Store = configureStore(InitialState(), hashHistory);
 
 ReactDOM.render(
-    <Root store={Store} history={browserHistory} />,
+    <Root store={Store} history={hashHistory} />,
     document.getElementById('app')
 );
